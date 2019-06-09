@@ -8,9 +8,9 @@ bettings = 100
 dealer_score = 0
 player_score = 0
 
-# Suits, Ranks and Values are all variables that hold multiple values. These are used in Card, Deck, Hand class.
+# Suits, Ranks are tuples, with values to form a deck of card. values is created by using a Dictionary. These are used in Card, Deck, Hand class.
 suits = ('♥', '♦', '♠', '♣')
-ranks = ('2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King', 'Ace')
+ranks = ( 'Jack', 'Queen', 'King', 'Ace')
 values = {'2':2, '3':3, '4':4, '5':5, '6':6, '7':7, '8':8, '9':9, '10':10, 'Jack':10,
          'Queen':10, 'King':10, 'Ace':11}
 
@@ -146,7 +146,7 @@ def splitPlay(dealer_cards, dealer_cards2, player_cards, player_cards2, currentB
     global bettings, player_score, dealer_score
     leftHand = True # Used to check if user is done with left hand game
     rightHand = True # Used to check if user is done with right hand game
-    print("You have a bet of: " + str(currentBet) + "for both of your hands")
+    print("You have a bet of: " + str(currentBet) + "$ for both of your hands\n")
     while leftHand and rightHand:
         #Left hand gameplay
         while leftHand and player_cards.value < 21:
@@ -155,9 +155,9 @@ def splitPlay(dealer_cards, dealer_cards2, player_cards, player_cards2, currentB
                 player_cards.add_card(deck.deal())
                 if player_cards.value > 21:
                     aceChecker(player_cards)
-                print("You now have a total of ", player_cards.value," from these cards ", *player_cards.cards)
+                print("\nYou now have a total of ", player_cards.value," from these cards ", *player_cards.cards)
             elif action_taken == "stay":
-                print("You now have a total of ", player_cards.value," from these cards ", *player_cards.cards)
+                print("\nYou now have a total of ", player_cards.value," from these cards ", *player_cards.cards)
                 print("The dealer has a total of ", dealer_cards.value," from these cards ", *dealer_cards.cards)
                 while dealer_cards.value < 17:
                     dealer_cards.add_card(deck.deal())
@@ -169,89 +169,89 @@ def splitPlay(dealer_cards, dealer_cards2, player_cards, player_cards2, currentB
                     # 2) Add 1 for player
                     player_score += 1
                     bettings = bettings + currentBet
-                    print("Dealer BUSTED!")
+                    print("\nDealer BUSTED!")
                     leftHand = False
                     break
                 elif dealer_cards.value >= player_cards.value:
                     # 2) Add 1 for dealer
                     dealer_score += 1
                     bettings = bettings - currentBet
-                    print("Dealer wins!")
+                    print("\nDealer wins!")
                     leftHand = False
                     break
                 else:
                     # 2) Add 1 for player
                     player_score += 1
                     bettings = bettings + currentBet
-                    print("You win!")
+                    print("\nYou win!")
                     leftHand = False
                     break
         # Ends gameplay if a player hits 21 or above        
         if player_cards.value > 21:
-                print("Player has a total of: ",player_cards.value,"That means the player busted! Dealer wins")
+                print("\nPlayer has a total of: ",player_cards.value,"That means the player busted! Dealer wins")
                 leftHand = False
                 dealer_score += 1
                 bettings = bettings - currentBet
         elif player_cards.value == 21:
-                print("Player has 21! THATS A BLACKJACK! Player wins!!!")
+                print("\nPlayer has 21! THATS A BLACKJACK! Player wins!!!")
                 leftHand = False
                 player_score += 1
                 bettings = bettings + currentBet
         
         #Right hand gameplay
-        print("Time to play the right hand")
-        print("The dealer has: X &", dealer_cards2.cards[1])
+        print("\nTime to play the right hand")
+        print("\nThe dealer has: X &", dealer_cards2.cards[1])
         while rightHand and player_cards2.value < 21:
             action_taken = str(input("Do you want to stay or hit? (type hit / stay)"))
             if action_taken == "hit":
                 player_cards2.add_card(deck.deal())
                 if player_cards2.value > 21:
                     aceChecker(player_cards2)
-                print("You now have a total of ", player_cards2.value," from these cards ", *player_cards2.cards)
+                print("\nYou now have a total of ", player_cards2.value," from these cards ", *player_cards2.cards)
             elif action_taken == "stay":
-                print("You now have a total of ", player_cards2.value," from these cards ", *player_cards2.cards)
+                print("\nYou now have a total of ", player_cards2.value," from these cards ", *player_cards2.cards)
                 print("The dealer has a total of ", dealer_cards2.value," from these cards ", *dealer_cards2.cards)
                 while dealer_cards2.value < 17:
                     dealer_cards2.add_card(deck.deal())
                     if dealer_cards2.value > 21:
                         aceChecker(dealer_cards2)
-                    print("Dealer is going for another card.","\n","He drew a: ", dealer_cards2.cards[-1])
+                    print("\nDealer is going for another card.","\n","He drew a: ", dealer_cards2.cards[-1])
                     print("The dealer has a total of ", dealer_cards2.value," from these cards ", *dealer_cards2.cards)
                 if dealer_cards2.value > 21:
                     # 2) Add 1 for player
                     player_score += 1
                     bettings = bettings + currentBet
-                    print("Dealer BUSTED!")
+                    print("\nDealer BUSTED!")
                     leftHand = False
                     break
                 elif dealer_cards2.value >= player_cards2.value:
                     # 2) Add 1 for dealer
                     dealer_score += 1
                     bettings = bettings - currentBet
-                    print("Dealer wins!")
+                    print("\nDealer wins!")
                     leftHand = False
                     break
                 else:
                     # 2) Add 1 for player
                     player_score += 1
                     bettings = bettings + currentBet
-                    print("You win!")
+                    print("\nYou win!")
                     leftHand = False
                     break
         # Ends gameplay if a player hits 21 or above        
         if player_cards2.value > 21:
-                print("Player has a total of: ",player_cards2.value,"That means the player busted! Dealer wins")
+                print("\nPlayer has a total of: ",player_cards2.value,"That means the player busted! Dealer wins")
                 leftHand = False
                 dealer_score += 1
                 bettings = bettings - currentBet
         elif player_cards2.value == 21:
-                print("Player has 21! THATS A BLACKJACK! Player wins!!!")
+                print("\nPlayer has 21! THATS A BLACKJACK! Player wins!!!")
                 leftHand = False
                 player_score += 1
                 bettings = bettings + currentBet
 
     if leftHand == False and rightHand == False:
-        print("Current scores: ")
+        print("\nCurrent scores: ")
         print("Dealer: " + str(dealer_score) + " games" + " - to - You: " + str(player_score) + " games")
 
 # play_game() is the only function called in main(). play_game() is where a game starts, and ends. 
@@ -312,10 +312,15 @@ def play_game():
                     print("You dont have enough money to play split" + "\n" + "Continueing with regular play")
                 elif split_action == "Y" and currentBet + currentBet < bettings:
                     player_hand2.cards.append(player_hand.cards[1]) # Appending card to a second hand.
-                    player_hand.cards.remove(player_hand.cards[1]) # Removing card from the first hand.
+                    player_hand.value -= values[player_hand.rankin] # Removing value from the first hand
+                    player_hand2.value += values[player_hand.rankin2] # Adding value to the second hand
+                    player_hand.cards.pop(1) # Removing card from the first hand.
                     print("Players left hand is now:", *player_hand.cards, "and their right hand is:", *player_hand2.cards)
                     while len(dealer_hand2.cards) != 2: # Dealing 2 cards to the dealer. So that he also has two hands.
                         dealer_hand2.add_card(deck.deal())
+
+                print(*player_hand2.cards, player_hand2.value)
+                print(*player_hand.cards, player_hand.value)
 
             # Double Down. If the value of a hand should be between 9 and 11, give the player the option to double down.
             if player_hand.value in (9,10,11): 
@@ -357,6 +362,7 @@ def play_game():
      
 
 def main():
+    
     play_game()
 
 if __name__ == "__main__":
