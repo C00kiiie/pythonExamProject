@@ -10,7 +10,7 @@ player_score = 0
 
 # Suits, Ranks are tuples, with values to form a deck of card. values is created by using a Dictionary. These are used in Card, Deck, Hand class.
 suits = ('♥', '♦', '♠', '♣')
-ranks = ( 'Jack', 'Queen', 'King', 'Ace')
+ranks = ('2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King', 'Ace')
 values = {'2':2, '3':3, '4':4, '5':5, '6':6, '7':7, '8':8, '9':9, '10':10, 'Jack':10,
          'Queen':10, 'King':10, 'Ace':11}
 
@@ -318,9 +318,6 @@ def play_game():
                     print("Players left hand is now:", *player_hand.cards, "and their right hand is:", *player_hand2.cards)
                     while len(dealer_hand2.cards) != 2: # Dealing 2 cards to the dealer. So that he also has two hands.
                         dealer_hand2.add_card(deck.deal())
-
-                print(*player_hand2.cards, player_hand2.value)
-                print(*player_hand.cards, player_hand.value)
 
             # Double Down. If the value of a hand should be between 9 and 11, give the player the option to double down.
             if player_hand.value in (9,10,11): 
