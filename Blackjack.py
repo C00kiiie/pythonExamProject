@@ -1,12 +1,8 @@
 import random
-import copy
 
-# Variables to keep track of a players money to play for (bettings)
-# and two variables (dealer_score & player_score) that keep track of the overall score between the player and the dealer. 
-# These will increment every time a game is over.
-bettings = 100
-dealer_score = 0
-player_score = 0
+bettings = 100 # Used to keep track of amount left
+dealer_score = 0 # increment after each game, if won
+player_score = 0 # increment after each game, if won
 
 # Suits, Ranks are tuples, with values to form a deck of card. values is created by using a Dictionary. These are used in Card, Deck, Hand class.
 suits = ('♥', '♦', '♠', '♣')
@@ -15,8 +11,9 @@ values = {'2':2, '3':3, '4':4, '5':5, '6':6, '7':7, '8':8, '9':9, '10':10, 'Jack
          'Queen':10, 'King':10, 'Ace':11}
 
 # Creating Card class.
-# This class is used to create cards.
 class Card:
+    """A card used to create a deck.
+    We are creating a String out of rank and suit """
     def __init__(self, suit, rank):
         self.suit = suit
         self.rank = rank
@@ -25,8 +22,9 @@ class Card:
         return self.rank + self.suit
 
 # Creating Deck class 
-# This class is used to shuffle the deck, and dealing cards out of the deck.
 class Deck:
+    """This class is used to shuffle the deck,
+    and dealing cards out of the deck. """
     def __init__(self):
         self.deck = []  # Create an empty list, and fill it out with suits and ranks, from the Card class.
         for suit in suits:
@@ -43,9 +41,11 @@ class Deck:
         return single_card
 
 # Creating Hand class. 
-# This class is later used as a way to deal- and keep track of a player/dealer hand.
-# The Hand class keeps track of cards and the totalt value of them. Also keeps track of aces.
 class Hand:
+    """This class is later used as a way to deal- and keep track of a player/dealer hand.
+    The Hand class keeps track of cards and the totalt value of them. 
+    Also keeps track of aces. """
+
     def __init__(self):
         self.cards = []  # start with an empty list as we did in the Deck class
         self.value = 0   # start with zero value, so that we can add to it later.
@@ -66,8 +66,9 @@ class Hand:
         if card.rank == 'Ace':
             self.aces += 1
     
-# A function to check a hand for aces, if a hands value eceets 21.
+
 def aceChecker(hand):
+    """ A function to check a hand for aces, if a hands value eceets 21 """
     while hand.value > 21 and hand.aces > 0:
         hand.value -= 10
         hand.aces -= 1
@@ -76,10 +77,10 @@ def aceChecker(hand):
 ### Below functions (regularPlay, splitPlay and play_game) are the main part of this Blackjack game ###
 ### play_game() includes the dealing of cards and betting, etc. ###
 ### From play_game(), other functions are called, such as regularPlay and splitPlay ###
-
-# regularPlay is if the player isn't dealt to of the same cards in the beginning of the game.
-# this function goes through a normal game of Blackjack, without any further gameplay-elements.
 def regularPlay(dealer_cards, player_cards, currentBet, deck):
+    """regularPlay is if the player isn't dealt to of the same cards in the beginning of the game.
+    this function goes through a normal game of Blackjack, without any further gameplay-elements """
+
     global bettings, player_score, dealer_score
     
     # Sum of the Player cards
@@ -140,9 +141,10 @@ def regularPlay(dealer_cards, player_cards, currentBet, deck):
     print("\n----Current scores----\n")
     print("Dealer: " + str(dealer_score) + " games" + " - to - You: " + str(player_score) + " games")
 
-# splitPlay is if the player should receive two of the same cards in the beginning of the game. 
-# if the player then chooses to 'split' his hand, the gameplay will continue inside the splitPlay() function.
 def splitPlay(dealer_cards, dealer_cards2, player_cards, player_cards2, currentBet, deck):
+    """splitPlay is if the player should receive two of the same cards in the beginning of the game. 
+    if the player then chooses to 'split' his hand, the gameplay will continue inside the splitPlay() function """
+
     global bettings, player_score, dealer_score
     leftHand = True # Used to check if user is done with left hand game
     rightHand = True # Used to check if user is done with right hand game
@@ -254,9 +256,12 @@ def splitPlay(dealer_cards, dealer_cards2, player_cards, player_cards2, currentB
         print("\nCurrent scores: ")
         print("Dealer: " + str(dealer_score) + " games" + " - to - You: " + str(player_score) + " games")
 
-# play_game() is the only function called in main(). play_game() is where a game starts, and ends. 
-# Here shuffeling, betting, splitting and double down is handled. Resolving in other function being called.
 def play_game():
+    """# play_game() is the only function called in main(). 
+    play_game() is where a game starts, and ends. 
+    Here shuffeling, betting, splitting and double down is handled. 
+    Resolving in other function being called. """
+
     # New variables 
     global bettings, player_score, dealer_score
 
@@ -359,7 +364,6 @@ def play_game():
      
 
 def main():
-    
     play_game()
 
 if __name__ == "__main__":

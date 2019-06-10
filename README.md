@@ -6,6 +6,7 @@ There are no requirements for the game to work
 ## Installation
 
 There are no requirements.txt, since there are no imports. 
+The only thing that need to be run is, Blackjack.py
 
 ## Usage
 
