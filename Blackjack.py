@@ -1,8 +1,8 @@
 import random
 
 bettings = 100 # Used to keep track of amount left
-dealer_score = 0 # increment after each game, if won
-player_score = 0 # increment after each game, if won
+dealer_score = 0 
+player_score = 0 
 
 # Suits, Ranks are tuples, with values to form a deck of card. values is created by using a Dictionary. These are used in Card, Deck, Hand class.
 suits = ('♥', '♦', '♠', '♣')
@@ -51,7 +51,6 @@ class Hand:
         self.value = 0   # start with zero value, so that we can add to it later.
         self.aces = 0    # add an attribute to keep track of aces
 
-        # adds variables that stores cards and their rank. Used if a split should ocour.
         self.rankin = ''
         self.rankin2 = ''
 
@@ -73,8 +72,7 @@ def aceChecker(hand):
         hand.value -= 10
         hand.aces -= 1
 
-
-### Below functions (regularPlay, splitPlay and play_game) are the main part of this Blackjack game ###
+### Below the 3 main functions (regularPlay, splitPlay and play_game), that are part of this Blackjack game ###
 ### play_game() includes the dealing of cards and betting, etc. ###
 ### From play_game(), other functions are called, such as regularPlay and splitPlay ###
 def regularPlay(dealer_cards, player_cards, currentBet, deck):
